@@ -12,7 +12,6 @@ require('conexion.php');
     $target_path = $target_path . basename( $_FILES['archivo']['name']); if(move_uploaded_file($_FILES['archivo']['tmp_name'], $target_path)) { $jsondata['success'] = "El archivo ". basename( $_FILES['archivo']['name']). " ha sido subido";
     } else{
       $jsondata['error'] =  error_get_last();
-      //echo "Ha ocurrido un error, trate de nuevo!";
    }
 
 
@@ -78,8 +77,8 @@ require('conexion.php');
     }*/
     
     //$query1 = "SELECT id_imagen FROM TIO_IMAGENES WHERE id_imagen >= ALL(SELECT id_imagen from TIO_IMAGENES)";
-    $query1 = "SELECT id_imagen FROM TIO_IMAGENES WHERE direccion_imagen = '$archivador' AND latitud_imagen = $v_latitud AND longitud_imagen = $v_longitud AND tam_imagen = $v_tamanio AND dispositivo_imagen = '$v_dispositivo' AND fecha_imagen = '$v_datetime' AND tipo_imagen = '$v_tipoimagen' AND nombre_archivo = '$_nombrearchivo'");
-
+    //$query1 = "SELECT * FROM TIO_IMAGENES WHERE  nombre_archivo like '$v_nombrearchivo'");
+    $query1 = "select id_imagen  from TIO_IMAGENES where nombre_archivo like '$v_nombrearchivo' AND dispositivo_imagen like '$v_dispositivo' AND tam_imagen = $v_tamanio";
     $result = $conn->query($query1);
     
     if ($result->num_rows > 0) {
@@ -87,7 +86,7 @@ require('conexion.php');
         $row = $result->fetch_assoc();
         $jsondata['id_imagen'] = $row['id_imagen'];
     } else {
-        $jsondata['id_imagen'] = "0 results";
+        $jsondata['resultado'] = "0 results";
     }
     
     $jsondata['error'] = error_get_last();

@@ -31,16 +31,30 @@ if(isset($_SESSION['user']) == false)
 <!-- gallery -->
 <link rel="stylesheet" href="assets/gallery/blueimp-gallery.min.css">
 
-<!-- favicon -->
-<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<!-- favicon Icono en la pestaniaaa-->
+<!--link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"-->
+<!--link rel="icon" href="images/favicon.ico" type="image/x-icon"-->
 
 
 <link rel="stylesheet" href="assets/style.css">
 
  <script src="http://maps.googleapis.com/maps/api/js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/index_filtro.js"></script>
+<style type="text/css">
+#about,#editlog,#mensaje_aviso
+{
+display:none;
+}
+ul,li, ul > li
+{
+cursor:pointer;
+}
+#imagenes,#comunidad_myphoto,#footer,#contact
+{
+display:none;
+}
+</style>
 </head>
 
 <body>
@@ -54,7 +68,7 @@ if(isset($_SESSION['user']) == false)
           <div class="container">
             <div class="navbar-header">
               <!-- Logo Starts -->
-              <a style="margin-top:15px;" class="navbar-brand" href="#home">Bienvenido <?php echo $_SESSION['user'];?></a>
+              <a style="margin-top:15px;" class="navbar-brand" href="index1.php">Bienvenido <?php echo $_SESSION['user'];?></a>
               <!-- #Logo Ends -->
 
 
@@ -71,7 +85,8 @@ if(isset($_SESSION['user']) == false)
             <!-- Nav Starts -->
             <div class="navbar-collapse  collapse">
               <ul class="nav navbar-nav navbar-right scroll">
-                 <li class="active"><a href="#works">Home</a></li>
+                <li class="active"><a id="home_" href="#works">Home</a></li>
+		<li ><a id="filtrar" href="#seccion_filtro">Buscar usuario</a></li>
 		 <li ><a href="#comunidad_myphoto">Acerca de Myphoto</a></li>
 		 <!--li ><a href="#contact">Subir imagen</a></li-->
                  <li >
@@ -80,10 +95,10 @@ if(isset($_SESSION['user']) == false)
     			<span class="caret"></span>
   			</a>
   			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    				<li><a href="#">Mis fotos</a></li>
+    				<li><a id="mis_fotos" href="#works">Mis fotos</a></li>
     				<li><a href="#contact">Subir imagen</a></li>
-  				<li><a href="#editar_perfil">Editar mi perfil</a></li>
-                                <li id="#salir"><a href="">Salir</a></li>
+  				<li><a id="perfil" href="#editlog">Editar mi perfil</a></li>
+                                <li id="salir"><a href="">Salir</a></li>
   			</ul>
 		</li>
               </ul>
@@ -94,105 +109,22 @@ if(isset($_SESSION['user']) == false)
         </div>
 
       </div>
+</div>
+
+<div id="mensaje_aviso" class="spacer"></div>
+<div id="seccion_filtro"  style="display:none;margin-top:150px;text-align:center;">
+<form class="navbar-form " role="search">
+    <div class="form-group">
+        <input type="text" class="form-control" id="filtro_buscar" placeholder="Introduce usuario">
     </div>
+    <button id="boton_filtro" type="submit" class="btn btn-default">Buscar</button>
+</form>
+
+</div>	
 <!-- #Header Starts -->
 <!-- works -->
-<div id="works"  class=" clearfix grid"> 
-    <!--figure id="" class="effect-oscar  wowload fadeIn">
-        <img id="" src="images/portfolio/3.jpg" alt="No puede encontrarse la imagen"/>
-        <figcaption>
-            <h2 id="etiqueta">Paisaje</h2>
-            <p>Lily likes to play with crayons and pencils<br>
-            <a href="" title="1" data-gallery>View more</a>
-            <a href="#about" id="imagen1" title="">Info foto</a>          
-            </p>  
-        </figcaption>
-    </figure-->
-     <!--figure class="effect-oscar  wowload fadeInUp">
-        <img id="" src="images/portfolio/3.jpg">
-        <figcaption>
-            <h2>Events</h2>
-            <p>Lily likes to play with crayons and pencils<br>
-            <a href="images/portfolio/3.jpg" title="1" data-gallery>View more</a>            
-            <a href="#about" id="imagen2" title="">Info foto</a>         
-	    </p>
-        </figcaption>
-    </figure>
-     <figure class="effect-oscar  wowload fadeInUp">
-        <img id="" src="images/portfolio/3.jpg" alt="img01"/>
-        <figcaption>
-            <h2>music</h2>
-            <p>Lily likes to play with crayons and pencils<br>
-            <a href="images/portfolio/3.jpg" title="1" data-gallery>View more</a>            
-            <a href="#about" id="imagen3" title="">Info foto</a>
-	    </p>
-	</figcaption>
-    </figure>
-     <figure class="effect-oscar  wowload fadeInUp">
-        <img id="" src="images/portfolio/4.jpg" alt="img01"/>
-        <figcaption>
-            <h2>Vintage</h2>
-            <p>Lily likes to play with crayons and pencils<br>
-            <a href="images/portfolio/4.jpg" title="1" data-gallery>View more</a></p>            
-        </figcaption>
-    </figure>
-     <figure class="effect-oscar  wowload fadeInUp">
-        <img  id="" src="images/portfolio/5.jpg" alt="img01"/>
-        <figcaption>
-            <h2>Typers</h2>
-            <p>Lily likes to play with crayons and pencils<br>
-            <a href="images/portfolio/5.jpg" title="1" data-gallery>View more</a></p>            
-        </figcaption>
-    </figure>
-     
-     <figure class="effect-oscar  wowload fadeInUp">
-        <img src="images/portfolio/6.jpg" alt="img01"/>
-        <figcaption>
-            <h2>hotel</h2>
-            <p>Lily likes to play with crayons and pencils<br>
-            <a href="images/portfolio/6.jpg" title="1" data-gallery>View more</a></p>            
-        </figcaption>
-    </figure>
-    <figure class="effect-oscar  wowload fadeInUp">
-        <img src="images/portfolio/7.jpg" alt="img01"/>
-        <figcaption>
-            <h2>Chinese</h2>
-            <p>Lily likes to play with crayons and pencils<br>
-            <a href="images/portfolio/7.jpg" title="1" data-gallery>View more</a></p>            
-        </figcaption>
-    </figure>
-    <figure class="effect-oscar  wowload fadeInUp">
-        <img src="images/portfolio/8.jpg" alt="img01"/>
-        <figcaption>
-            <h2>Dicrap</h2>
-            <p>Lily likes to play with crayons and pencils<br>
-            <a href="images/portfolio/8.jpg" title="1" data-gallery>View more</a></p>            
-        </figcaption>
-    </figure>
-    <figure class="effect-oscar  wowload fadeInUp">
-        <img src="images/portfolio/9.jpg" alt="img01"/>
-        <figcaption>
-            <h2>Coffee</h2>
-            <p>Lily likes to play with crayons and pencils<br>
-            <a href="images/portfolio/9.jpg" title="1" data-gallery>View more</a></p>            
-        </figcaption>
-    </figure>
-    <figure class="effect-oscar  wowload fadeInUp">
-        <img src="images/portfolio/10.jpg" alt="img01"/>
-        <figcaption>
-            <h2>cameras</h2>
-            <p>Lily likes to play with crayons and pencils<br>
-            <a href="images/portfolio/10.jpg" title="1" data-gallery>View more</a></p>            
-        </figcaption>
-    </figure>
-    <figure class="effect-oscar  wowload fadeInUp">
-        <img src="images/portfolio/11.jpg" alt="img01"/>
-        <figcaption>
-            <h2>design</h2>
-            <p>Lily likes to play with crayons and pencils<br>
-            <a href="images/portfolio/11.jpg" title="1" data-gallery>View more</a></p>            
-        </figcaption>
-    </figure>
+<div id="imagenes">
+<!--div id="works"  class="clearfix grid"> 
     <figure class="effect-oscar  wowload fadeInUp">
         <img src="images/portfolio/12.jpg" alt="img01"/>
         <figcaption>
@@ -200,14 +132,12 @@ if(isset($_SESSION['user']) == false)
             <p>Lily likes to play with crayons and pencils<br>
             <a href="images/portfolio/12.jpg" title="1" data-gallery>View more</a></p>            
         </figcaption>
-    </figure-->
-     
+    </figure>     
+</div-->
+</div>
+<div class="spacer">
 </div>
 <!-- works -->
-<div id="works"  class=" clearfix grid">
-		
-</div>
-
 
 <!-- Cirlce Starts -->
 <div id="about"  class="container spacer about">
@@ -215,14 +145,12 @@ if(isset($_SESSION['user']) == false)
   <div class="row">
   <div class="col-sm-6 wowload fadeInLeft">
     <h4><i class=""></i> Localización</h4>
-    <!--p>Creative digital agency for sleek and sophisticated solutions for mobile, websites and software designs, lead by passionate and uber progressive team that lives and breathes design. Creative digital agency for sleek and sophisticated solutions for mobile, websites and software designs.</p>
-    -->
-<div id="googleMap" style="width:500px;height:380px;"></div><!--iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.84073994104!2d-16.319266349811603!3d28.48434249743822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xc41cdb935b0bc59%3A0x651a798abdce1bbb!2sAv.+Trinidad%2C+San+Crist%C3%B3bal+de+La+Laguna%2C+Santa+Cruz+de+Tenerife!5e0!3m2!1ses!2ses!4v1449316167632" width="480" height = "350" frameborder="0" style="border:0" allowfullscreen></iframe>
+    <div id="googleMap" style="width:500px;height:380px;"></div><!--iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.84073994104!2d-16.319266349811603!3d28.48434249743822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xc41cdb935b0bc59%3A0x651a798abdce1bbb!2sAv.+Trinidad%2C+San+Crist%C3%B3bal+de+La+Laguna%2C+Santa+Cruz+de+Tenerife!5e0!3m2!1ses!2ses!4v1449316167632" width="480" height = "350" frameborder="0" style="border:0" allowfullscreen></iframe>
 -->
   </div>
   <div class="col-sm-6 wowload fadeInRight">
-  <h4 id="titulo"><i class=""></i>Una noche en París </h4>
-  <p id="descripcion_imagen">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>    
+  <h4 id="titulo_imagen"><i class=""></i></h4>
+  <p id="descripcion_imagen"></p>    
  <table id="detalles_foto" class="table table-bordered table-condensed table-hover">
                             <thead>
                                 <tr>
@@ -232,12 +160,8 @@ if(isset($_SESSION['user']) == false)
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Titulo imagen:</td>
-                                    <td id="titulo_imagen"></td>
-                                </tr>
-                                <tr>
-                                    <td>Lugar imagen:</td>
-                                    <td id="lugar_imagen"></td>
+                                     <td>Autor imagen:</td>
+                                     <td id="autor_imagen"></td>
                                 </tr>
                                 <tr>
                                     <td>Latitud imagen:</td>
@@ -247,10 +171,6 @@ if(isset($_SESSION['user']) == false)
                                     <td>Longitud imagen:</td>
                                     <td id="longitud_imagen"></td>
                                 </tr>
-				<tr>
-				     <td>Autor imagen:</td>
-				     <td id="autor_imagen"></td>
-				</tr>
 				<tr>
 				     <td>Tipo de imagen:</td>
 			             <td id="tipo_imagen"></td>
@@ -276,7 +196,7 @@ if(isset($_SESSION['user']) == false)
          </table>
   </div>
   </div>
-<div id="comunidad_myphoto" class="spacer">
+<div id="" class="spacer">
   <div class="process">
   <h3 class="text-center wowload fadeInUp">Process</h3>
   <ul class="row text-center list-inline  wowload bounceInUp">
@@ -301,13 +221,14 @@ if(isset($_SESSION['user']) == false)
 </div>
 <!-- #Cirlce Ends -->
 <!-- About Starts -->
-<div class="highlight-info" style="margin-top:-40px;">
+<br><br><br id="comunidad_myphoto">
+<div class="highlight-info">
 <div class="overlay spacer">
 <div class="container">
 <div class="row text-center  wowload fadeInDownBig">
 
   <div class="col-sm-4 col-xs-6">
-  <i class="fa fa-smile-o  fa-5x"></i><h4 id="numero_cliente"OB></h4>
+  <i class="fa fa-smile-o  fa-5x"></i><h4 id="numero_cliente"></h4>
   </div>
   <div class="col-sm-4 col-xs-6">
   <i class="fa fa-camera  fa-5x"></i><h4 id="numero_fotos"></h4>
@@ -342,8 +263,50 @@ if(isset($_SESSION['user']) == false)
                 <form>
 		<input style="border:0px;" type="file" name="archivoImage" id="archivoImage">
 		<!--input type="file" style="border:0px;" placeholder="Seleccionar la imagen"-->
+		<div class="col-sm-8">
+                Selecciona una categoría:<br>
+		<!--div class="checkbox">
+ 		 <label>
+ 		   <input class="" type="checkbox" name="blankRadio" id="blankRadio1" value="option7" aria-label="1">Paisaje
+		 </label>
+		</div-->
+                <div class="radio">
+                 <label>
+                   <input class="pull-right" name="blankRadio" id="" type="radio" value="musica" aria-label="1">Música
+                 </label>
+                </div>
+                <div class="radio">
+                 <label>
+                   <input class="pull-right" name="blankRadio" id="" type="radio" value="familia" aria-label="2">Familia
+                 </label>
+                </div>
+                <div class="radio">
+                 <label>
+                   <input class="pull-right" name="blankRadio" id="" type="radio" value="viajes" aria-label="3">Viajes
+                 </label>
+                </div>
+                <div class="radio">
+                 <label>
+                   <input class="pull-right" name="blankRadio" id="" type="radio" value="amigos" aria-label="1">Amigos
+                 </label>
+                </div>
+                <div class="radio">
+                 <label>
+                   <input class="pull-left" name="blankRadio" id="" type="radio" value="paisajes" aria-label="1">Paisajes
+                 </label>
+                </div>
+                <div class="radio">
+                 <label>
+                   <input class="pull-left" name="blankRadio" id="" type="radio" value="encuentros" aria-label="1">Encuentros
+                 </label>
+                </div>
+		<div class="input-group">
+  			Otra categoría:<br><br>
+                	<input id="otra_categoria" type ="text" placeholder="">
+		</div>
 		</form>
-		<div id="imagen_a_subir"></div>
+		</div>
+		<div class="col-sm-3" id="imagen_a_subir"></div>
 		<a href="" class="pull-right" style="display:none;">Añadir más imagenes</a>
       	</div>
    </div>
@@ -354,17 +317,14 @@ if(isset($_SESSION['user']) == false)
    </div>
   </div>
 
-
-
 </div>
 </div>
 
 <!--Editar el perfil-->
 <!--Contact Ends-->
-<div id="editar_perfil" class="spacer">
-
+<div id="editlog" class="spacer">
 <div class="container contactform center">
-<h2 class="text-center  wowload fadeInUp">Editar mi perfil</h2>
+<h2  class="text-center  wowload fadeInUp">Editar mi perfil</h2>
   <div class="row wowload fadeInLeftBig">
       <div class="col-sm-12 col-xs-12">
         <div class="col-sm-5 col-sm-offset-1 col-xs-12">
@@ -400,15 +360,11 @@ if(isset($_SESSION['user']) == false)
         </div>
    </div>
   </div>
-
-
-
 </div>
 </div>
-
 
 <!-- Footer Starts -->
-<div class="footer text-center spacer">
+<div id="footer" class="footer text-center spacer">
 <p class="wowload flipInX">
 	<a href="http://www.facebook.com" target="blank"><i class="fa fa-facebook fa-2x"></i></a>
 	<a href="http://www.instagram.com" target="blank"><i class="fa fa-instagram fa-2x"></i></a>
@@ -417,8 +373,9 @@ if(isset($_SESSION['user']) == false)
 Copyright 2015 Myphoto. All rights reserved.
 </div>
 <!-- # Footer Ends -->
-<a href="#works" class="gototop "><i class="fa fa-angle-up  fa-3x"></i></a>
-
+<div id="flecha_control" style="display:none;">
+<a href="#works" class="gototop "><i  class="fa fa-angle-up  fa-3x"></i></a>
+</div>
 
 
 
@@ -438,7 +395,7 @@ Copyright 2015 Myphoto. All rights reserved.
 
 
 <!-- jquery -->
-<script src="assets/jquery.js"></script>
+<script src="assets/jquery1.js"></script>
 
 <!-- wow script -->
 <script src="assets/wow/wow.min.js"></script>

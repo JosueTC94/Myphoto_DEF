@@ -5,6 +5,8 @@
      session_start();
      $jsondata = array();
      
+
+     $jsondata['usuario_actual'] = $_SESSION['user']; 
      $sql = "SELECT COUNT(user) as users from TIO_usuarios";
  
      $result = $conn->query($sql);
@@ -106,17 +108,16 @@
      if($result5->num_rows > 0)
      {
              //$row = $result->fetch_assoc();
+	     $jsondata['num_imagenes'] = $result5->num_rows;
 	     $jsondata['imagenes'] = array();
 	     while($row5 = $result5->fetch_array())
-	     {	
-             
-			$jsondata['imagenes'][] = $row5;  
-     	     
+	     {	     
+		$jsondata['imagenes'][] = $row5;   
 	     }
      }
      else
      {
-             $jsondata['imagenes'] = "0 results";
+             $jsondata['num_imagenes'] = 0;
      } 
  	 
     $jsondata['error'] = error_get_last();

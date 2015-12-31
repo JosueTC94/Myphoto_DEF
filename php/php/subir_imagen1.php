@@ -10,8 +10,8 @@ session_start();
 	$autor_imagen = $_POST['autor_imagen'];
 	$detalles_foto = $_POST['detalles_imagen'];
 	$palabra_clave = $_POST['palabra_clave'];
-
-         $sql = "UPDATE TIO_IMAGENES set titulo_imagen = '$titulo_imagen',autor_imagen = '$autor_imagen',descripcion_imagen = '$detalles_foto',categoria = '$palabra_clave' WHERE id_imagen = $id_imagen";
+	$usuario = $_POST['autor_imagen'];
+         $sql = "UPDATE TIO_IMAGENES set titulo_imagen = '$titulo_imagen',autor_imagen = '$autor_imagen',descripcion_imagen = '$detalles_foto',categoria = '$palabra_clave',usuario = '$usuario' WHERE id_imagen = $id_imagen";
 
     $jsondata['probando']= $conn->query($sql);
 
