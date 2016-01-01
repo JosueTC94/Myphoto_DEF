@@ -47,7 +47,7 @@ $(document).ready(function()
             //alert("Usu->"+data.usu);
             //alert("pass->"+data.pass);
             		$("#mensaje_respuesta").html("<h4>"+data.respuesta+"</h4>");
-            		setTimeout(function(){location.href="../index1.php";},500);
+            		setTimeout(function(){location.href="../inicio_filtro.php";},500);
             //Actualizo la variable sesion
 
         		})

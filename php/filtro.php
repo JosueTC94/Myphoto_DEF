@@ -18,7 +18,7 @@ $jsondata = array();
         }
         else
         {
-                $jsondata['resultados'] = "No se han encontrado resultados";
+                $jsondata['resultados'] = 0;
         }
 
      $sql5 = "SELECT * FROM TIO_IMAGENES WHERE usuario like '$filtro'";

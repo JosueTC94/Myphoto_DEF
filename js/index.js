@@ -13,25 +13,38 @@ url: "php/descarga_inicial.php"
 })
 .done(function(data,textStatus,jqXHR)
 {
-//alert("nciwocen"+data.numero_loc);
+alert("Imagenes->"+data.num_imagenes);
 $("#numero_cliente").html(data.numero_cliente);
 $("#numero_fotos").html(data.numero_fotos);
 $("#numero_loc").html(data.numero_loc);
 //Descarga inicial de fotografias	
-output = "<div id="+"works>";
-$.each(data.imagenes,function(key,value)
+if(data.num_imagenes != 0)
 {
-	output += "<figure class="+"effect-oscar  wowload fadeInUp"+"><img height=450px width=102% src="+value.direccion_imagen+" alt=No puede encontrarse la imagen/><figcaption><h2 id="+"etiqueta"+">"+value.categoria+"</h2><p>"+value.titulo_imagen+"<br><a  href="+value.direccion_imagen+" title="+value.titulo_imagen+" data-gallery>Ver</a><a id="+value.id_imagen+" href=#about>Info foto</a></p></figcaption></figure>";
-})
+	output = "<div id="+"works>";
+	$.each(data.imagenes,function(key,value)
+	{
+		output += "<figure class="+"effect-oscar  wowload fadeInUp"+"><img height=450px width=102% src="+value.direccion_imagen+" alt=No puede encontrarse la imagen/><figcaption><h2 id="+"etiqueta"+">"+value.categoria+"</h2><p>"+value.titulo_imagen+"<br><a  href="+value.direccion_imagen+" title="+value.titulo_imagen+" data-gallery>Ver</a><a id="+value.id_imagen+" href=#about>Info foto</a></p></figcaption></figure>";
+	})
+	output += "</div>";
+	$("#imagenes").html(output);
+	setTimeout(function(){
+	$("#imagenes").fadeIn();
+	$("#works").attr("class","clearfix grid");
+	$("#comunidad_myphoto").fadeIn();
+	//$("#contact").show();
+	//$("#footer").show();
+	},800);
+}
+else
+{
+	$("#mensaje_aviso").fadeIn();
+	$("#mensaje_aviso").html("<h4 style="+"text-align:center;margin-top:150px;"+">No se encuentran imagenes en el servidor</h4>");
+}
 
-output += "</div>";
-$("#imagenes").html(output);
 setTimeout(function(){
-$("#imagenes").fadeIn();
-$("#works").attr("class","clearfix grid");
-$("#comunidad_myphoto").show();
-$("#contact").show();
-$("#footer").show();
+	//$("#comunidad_myphoto").fadeIn();
+	$("#contact").fadeIn();
+	$("#footer").fadeIn();
 },800);
 
 setTimeout(function()
@@ -133,14 +146,13 @@ $(":radio").click(function()
 {
 	$(this).css("border-color","red");
 });
-$("#subir_imagen").click(function(event)
+$("#subir_imagen").click(function()
 {
-	event.preventDefault();
 	//alert($(":checked").val());
-	var titulo_imagen = $("#titulo_imagen").val();
-	var autor_imagen = $("#autor_imagen").val();
-	var detalles_imagen = $("#detalles_imagen").val();	
-	var imagen_subir;
+	//var titulo_imagen = $("#titulo_imagen").val();
+	//var autor_imagen = $("#autor_imagen").val();
+	//var detalles_imagen = $("#detalles_imagen").val();	
+	//var imagen_subir;
 	var palabra_clave = $(":checked").val();
         if(palabra_clave == null)
 	{
@@ -163,19 +175,9 @@ $("#subir_imagen").click(function(event)
             })
             .done(function(data,textStatus,jqXHR)
             {
-                alert("Entre en el done");
-                //alert("Data-success:"+data.conexion);
-                //alert("Data-archivo:"+data.nombre_archivo);
-               // alert("Tipo-archivo"+data.tipo_archivo);
-               //    alert("Tmp-archivo:"+data.tmp_archivo);
-                //alert("Archivador:"+data.archivador);
-                //alert("Data-success:"+data.success);
-                //alert("Error:"+data.error);
-               // alert("Id_imagen:"+data.id_imagen);
+                alert("Entre en el done"+data.id_imagen);
                 id_imagen = data.id_imagen;
-		//alert("mov->"+data.mov);
-		//alert("Latitud->"+data.latitud);
-                //alert("V_imagen->"+data.v_imagen);
+		
 		//Actualizamos los campos autor,titulo y detalles de la imagen introducida
 		
 		var titulo_imagen = $("#title").val();
@@ -190,19 +192,49 @@ $("#subir_imagen").click(function(event)
         	})
         	.done(function(data,textStatus,jqXHR)
         	{
-                	alert("Data->"+data.success);
+                	//alert("Data->"+data.success);
                 	$("#mensaje_respuesta_subida").html(data.respuesta);
 		})
         	.fail(function(jqXHR,textStatus,errorThrown)
         	{
-                	alert("Fail cnweio");
-        	        $("#mensaje_respuesta_subida").html(data.respuesta);
+                   alert("Entre en el fail . . . . . . . . .");
+                   if (jqXHR.status === 0) {
+                   alert('Not connected.\nPlease verify your network connection.');
+                   }else if (jqXHR.status == 404) {
+                   alert('The requested page not found. [404]');
+                   }else if (jqXHR.status == 500) {
+                   alert('Internal Server Error [500].');
+                   }else if (jqXHR === 'parsererror') {
+                   alert('Requested JSON parse failed.');
+                   }else if (jqXHR === 'timeout') {
+                   alert('Time out error.');
+                   }else if (jqXHR === 'abort') {
+                   alert('Ajax request aborted.');
+                   }else{
+                   alert('Uncaught Error.\n' + jqXHR.responseText);
+                   }
+
 	        });
 
 	    })
             .fail(function(jqXHR,textStatus,errorThrown)
             {
-               alert("Entre en el fail");
+                   alert("Entre en el fail");
+                   if (jqXHR.status === 0) {
+                   alert('Not connected.\nPlease verify your network connection.');
+                   }else if (jqXHR.status == 404) {
+                   alert('The requested page not found. [404]');
+                   }else if (jqXHR.status == 500) {
+                   alert('Internal Server Error [500].');
+                   }else if (jqXHR === 'parsererror') {
+                   alert('Requested JSON parse failed.');
+                   }else if (jqXHR === 'timeout') {
+                   alert('Time out error.');
+                   }else if (jqXHR === 'abort') {
+                   alert('Ajax request aborted.');
+                   }else{
+                   alert('Uncaught Error.\n' + jqXHR.responseText);
+                   }
             });	
        
 });

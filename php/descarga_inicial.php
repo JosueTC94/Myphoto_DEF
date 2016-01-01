@@ -118,8 +118,26 @@
      else
      {
              $jsondata['num_imagenes'] = 0;
-     } 
- 	 
+     }
+
+     $sql10= "SELECT DISTINCT categoria FROM TIO_IMAGENES";
+     $result10 = $conn->query($sql10);
+     $rowcount10 = $result10->num_rows;
+     if($result10->num_rows > 0)
+     {
+             //$row = $result->fetch_assoc();
+             $jsondata['num_categorias'] = $rowcount10;
+             $jsondata['categoria'] = array();
+             while($row10 = $result10->fetch_array())
+             {
+                $jsondata['categoria'][] = $row10;
+             }
+     }
+     else
+     {
+             $jsondata['num_categorias'] = 0;
+     }
+  	 
     $jsondata['error'] = error_get_last();
     header('Content-type: application/json; charset=utf-8');
     echo json_encode($jsondata, JSON_FORCE_OBJECT);

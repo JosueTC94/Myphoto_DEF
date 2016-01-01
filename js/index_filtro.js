@@ -6,11 +6,17 @@ var myCenter;
 var output;
 var id_imagen = 69;
 var usuario_sesion;
-
+var filtro_categoria;
 
 $("#home_").click(function()
 {
-mostrar_imagenes(null);
+$("#seccion_filtro").css("display","none");
+location.href="inicio_filtro.php";
+});
+
+$("#acerca").click(function()
+{
+location.href="#comunidad_myphoto";
 });
 
 $("#filtrar").click(function()
@@ -19,12 +25,11 @@ $("#filtrar").click(function()
 	$("#seccion_filtro").attr("class","active");
 });
 
-$("#boton_filtro").click(function()
+$("#boton_filtro").click(function(event)
 {
-//alert("Boton filtro");
-//alert("Filtro->"+$("#filtro_buscar").val());
+event.preventDefault();
 
-mostrar_imagenes($("#filtro_buscar").val());
+mostrar_imagenes($("#filtro_buscar").val(),null);
 $("#seccion_filtro").fadeOut();
 });
 
@@ -32,7 +37,50 @@ $("#mis_fotos").click(function()
 {
 //	alert("mis fotos");
 //	alert(usuario_sesion);
-	mostrar_imagenes(usuario_sesion);
+	mostrar_imagenes(usuario_sesion,null);
+});
+
+$("#paisajes").click(function()
+{
+//alert("Paisajes");
+filtro_categoria = "paisajes";
+mostrar_imagenes(null,	filtro_categoria);
+});
+$("#amigos").click(function()
+{
+//alert("amigos");
+filtro_categoria = "amigos";
+mostrar_imagenes(null,  filtro_categoria);
+});
+$("#musica").click(function()
+{
+//alert("musica");
+filtro_categoria = "musica";
+mostrar_imagenes(null,  filtro_categoria);
+});
+$("#familia").click(function()
+{
+//alert("familia");
+filtro_categoria = "familia";
+mostrar_imagenes(null,  filtro_categoria);
+});
+$("#viajes").click(function()
+{
+//alert("viajes");
+filtro_categoria = "viajes";
+mostrar_imagenes(null,  filtro_categoria);
+});
+$("#encuentros").click(function()
+{
+//alert("encuentros");
+filtro_categoria = "encuentros";
+mostrar_imagenes(null,  filtro_categoria);
+});
+$("#otras_categorias").click(function()
+{
+//alert("Otras categorias");
+//filtro_categoria = "paisajes";
+mostrar_imagenes(null,  null);
 });
 
 $.ajax({
@@ -40,6 +88,8 @@ url:"php/descarga_inicial.php"
 })
 .done(function(data,textStatus,errorThrown)
 {
+//alert("Numero de categorias disponibles->"+data.num_categorias);
+ 
 $("#numero_cliente").html(data.numero_cliente);
 $("#numero_fotos").html(data.numero_fotos);
 $("#numero_loc").html(data.numero_loc);
@@ -55,6 +105,7 @@ $("#descripcion_perfil").val(data.descripcion_perfil);
 //Subir_imagen
 $("#author").val(data.user_perfil);
 
+//Mostramos las categorias disponibles
 })
 .fail(function(jqXHR,textStatus,errorThrown)
 {
@@ -63,17 +114,18 @@ alert("PETADA PROFUNDA");
 
 //--------------------------------------Muestra de imagenes inicial-----------------------------------------------------------------
 //En lugar de cargar todas las imagenes del servidor podríamos volcar directamente las categorías disponibles
-mostrar_imagenes();
+//mostrar_imagenes();
+/*$("#imagenes").fadeIn();
 setTimeout(function(){
         //$("#comunidad_myphoto").fadeIn();
         $("#contact").fadeIn();
         $("#footer").fadeIn();
 },800);
-
+*/
 setTimeout(function()
 {
 $("#flecha_control").fadeIn("slow");
-},2000);
+},1200);
 
 
 /*
@@ -340,30 +392,31 @@ var marker=new google.maps.Marker({
 marker.setMap(map);
 }
 
-function mostrar_imagenes(filtro)
+function mostrar_imagenes(filtro_usuario,filtro_categoria)
 {
 //alert("Entr en funcion");
 var id_minimo;
 var id_maximo;
 var datos;
 var url_;
-if(filtro != null)
+if(filtro_usuario != null)
 {
-/*	if(filtro == "musica" || filtro == "paisaje" || filtro == "amigos" || filtro == "universidad")
-	{
-		datos = "categoria="+filtro;
-		url_ = "php/descarga_porcategoria.php"
-	}
-*/
-//alert("Entre en filtro funcion");
-datos = "buscando="+filtro;
-url_ = "php/filtro.php";
+	datos = "buscando="+filtro_usuario;
+	url_ = "php/filtro.php";
 }else
 {
-//alert("Entre en no filtro funcion");
-datos = "";
-url_ = "php/descarga_inicial.php";
+	if(filtro_categoria != null)
+	{
+		datos = "buscando="+filtro_categoria;
+		url_ = "php/filtro_categoria.php";
+	}
+	else
+	{
+		datos = "";
+		url_ = "php/descarga_inicial.php";
+	}
 }
+
 $.ajax({
 data: datos,
 type: "POST",
@@ -400,6 +453,11 @@ if(data.resultados != 0)
         $("#imagenes").html(salida);
         $("#imagenes").fadeIn();
         $("#works").attr("class", "clearfix grid");
+}
+else
+{
+	$("#mensaje_aviso").fadeIn();
+	$("#mensaje_aviso").html("<h4 style=text-align:center;margin-top:150px;>No se han encontrado imagenes</h4>");
 }
 for(i=id_minimo;i<=id_maximo;i++)
 {

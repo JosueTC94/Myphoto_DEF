@@ -3,7 +3,7 @@ session_start();
 
 if(isset($_SESSION['user']) == true)
 {
-        header("location: ../index1.php");
+        header("location: ../inicio_filtro.php");
 }
 ?>
 <!DOCTYPE html>

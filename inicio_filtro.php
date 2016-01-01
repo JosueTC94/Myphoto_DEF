@@ -50,10 +50,6 @@ ul,li, ul > li
 {
 cursor:pointer;
 }
-#imagenes,#comunidad_myphoto,#footer,#contact
-{
-display:none;
-}
 </style>
 </head>
 
@@ -85,9 +81,9 @@ display:none;
             <!-- Nav Starts -->
             <div class="navbar-collapse  collapse">
               <ul class="nav navbar-nav navbar-right scroll">
-                <li class="active"><a id="home_" href="#works">Home</a></li>
+                <li class="active"><a id="home_"  href="inicio_filtro.php">Home</a></li>
 		<li ><a id="filtrar" href="#seccion_filtro">Buscar usuario</a></li>
-		 <li ><a href="#comunidad_myphoto">Acerca de Myphoto</a></li>
+		 <li ><a id="acerca">Acerca de Myphoto</a></li>
 		 <!--li ><a href="#contact">Subir imagen</a></li-->
                  <li >
   			<a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -124,16 +120,65 @@ display:none;
 <!-- #Header Starts -->
 <!-- works -->
 <div id="imagenes">
-<!--div id="works"  class="clearfix grid"> 
-    <figure class="effect-oscar  wowload fadeInUp">
-        <img src="images/portfolio/12.jpg" alt="img01"/>
+<div id="works"  class=" clearfix grid"> 
+    <figure class="effect-oscar  wowload fadeIn">
+        <img src="images/portfolio/1.jpg" alt="img01"/>
         <figcaption>
-            <h2>studio</h2>
-            <p>Lily likes to play with crayons and pencils<br>
-            <a href="images/portfolio/12.jpg" title="1" data-gallery>View more</a></p>            
+            <h2 id="etiqueta">Paisaje</h2>
+            <p>Descripción<br>
+            <a  id="paisajes" title="1">Ver más</a>
+            </p>  
         </figcaption>
-    </figure>     
-</div-->
+    </figure>
+     <figure class="effect-oscar  wowload fadeInUp">
+        <img src="images/portfolio/2.jpg" alt="img01"/>
+        <figcaption>
+            <h2>Amigos</h2>
+            <p>Descripción<br>
+            <a id="amigos" title="1">Ver más</a></p>            
+        </figcaption>
+    </figure>
+     <figure class="effect-oscar  wowload fadeInUp">
+        <img src="images/portfolio/3.jpg" alt="img01"/>
+        <figcaption>
+            <h2>Música</h2>
+            <p>Descripción<br>
+            <a  id="musica" title="1">Ver más</a></p>            
+        </figcaption>
+    </figure>
+     <figure class="effect-oscar  wowload fadeInUp">
+        <img src="images/portfolio/4.jpg" alt="img01"/>
+        <figcaption>
+            <h2>Familia</h2>
+            <p>Descripción<br>
+            <a  id="familia" title="1">Ver más</a></p>            
+        </figcaption>
+    </figure>
+     <figure class="effect-oscar  wowload fadeInUp">
+        <img src="images/portfolio/5.jpg" alt="img01"/>
+        <figcaption>
+            <h2>Viajes</h2>
+            <p>Descripción<br>
+            <a  id="viajes" title="1">Ver más</a></p>            
+        </figcaption>
+    </figure>
+     <figure class="effect-oscar  wowload fadeInUp">
+        <img src="images/portfolio/6.jpg" alt="img01"/>
+        <figcaption>
+            <h2>Encuentros</h2>
+            <p>Descripción<br>            
+	    <a  title="1" id="encuentros">Ver más</a></p>            
+        </figcaption>
+    </figure>
+    <figure class="effect-oscar  wowload fadeInUp">
+        <img src="images/portfolio/8.jpg" alt="img01"/>
+        <figcaption>
+            <h2>Otras</h2>
+            <p>Descripción<br>
+            <a  title="1" id="otras_categorias">Ver más</a></p>            
+        </figcaption>
+    </figure>
+</div>
 </div>
 <div class="spacer">
 </div>
@@ -221,8 +266,8 @@ display:none;
 </div>
 <!-- #Cirlce Ends -->
 <!-- About Starts -->
-<br><br><br id="comunidad_myphoto">
-<div class="highlight-info">
+<br><br><br>
+<div id="comunidad_myphoto" class="highlight-info">
 <div class="overlay spacer">
 <div class="container">
 <div class="row text-center  wowload fadeInDownBig">
