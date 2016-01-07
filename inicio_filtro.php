@@ -1,11 +1,10 @@
 <?php
 
-session_start();
-
-if(isset($_SESSION['user']) == false)
+if(isset($_COOKIE["Usuario_actual"]) == true)
 {
-        header("location:inicio_sesion/index.php");
+	header("location:inicio_sesion/index.php");
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,9 +63,8 @@ cursor:pointer;
           <div class="container">
             <div class="navbar-header">
               <!-- Logo Starts -->
-              <a style="margin-top:15px;" class="navbar-brand" href="index1.php">Bienvenido <?php echo $_SESSION['user'];?></a>
+              <a style="margin-top:15px;" class="navbar-brand" href="inicio_filtro.php" id="bienvenida_usuario"></a>
               <!-- #Logo Ends -->
-
 
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -110,9 +108,9 @@ cursor:pointer;
 <div id="mensaje_aviso" class="spacer"></div>
 <div id="seccion_filtro"  style="display:none;margin-top:150px;text-align:center;">
 <form class="navbar-form " role="search">
-    <div class="form-group">
-        <input type="text" class="form-control" id="filtro_buscar" placeholder="Introduce usuario">
-    </div>
+	    <div class="form-group">
+	        <input type="text" class="form-control" id="filtro_buscar" placeholder="Introduce usuario">
+	    </div>
     <button id="boton_filtro" type="submit" class="btn btn-default">Buscar</button>
 </form>
 

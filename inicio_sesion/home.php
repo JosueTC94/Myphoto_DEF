@@ -1,8 +1,11 @@
 <?php
-if(isset($_COOKIE['usuario']) == true)
+session_start();
+
+$_SESSION['usuario'] = "Josue";
+/*if(isset($_SESSION['user']) == true)
 {
-      header("location: ../inicio_filtro.php");
-}
+        header("location: ../inicio_filtro.php");
+}*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +36,7 @@ if(isset($_COOKIE['usuario']) == true)
   </head>
 
   <body>
+
     <!-- Fixed navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -60,7 +64,7 @@ if(isset($_COOKIE['usuario']) == true)
 					<h1 style="color:black;margin-top:-20px;">Formulario de registro</h1>
                                         <h2 class="subtitle" style="color:black">Introduce tus datos de usuario</h2>
 
-                                        <form role="form" method="POST">
+                                        <form role="form">
                                                 <div class="form-group">
                                                 <label for="nombre">Nombre:</label>
                                                 <input type="text" class="form-control" id="nombre_registro" placeholder="">
@@ -103,10 +107,10 @@ if(isset($_COOKIE['usuario']) == true)
 				<div class="col-lg-6" id="inicio_sesion">
 					<h1 style="color:black">Inicio de sesión</h1>
 					<h2 class="subtitle" style="color:black">Introduce tus datos de usuario</h2>
-					<form class="form-inline signup" role="form"  method="POST">
+					<form class="form-inline signup" role="form">
 					  <div class="form-group">
-					    <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Usuario">
-                                            <input type="password" class="form-control" name="contrasenia" id="contrasenia" placeholder="Contraseña">
+					    <input type="text" class="form-control" id="user" placeholder="Usuario">
+                                            <input type="password" class="form-control" id="pass" placeholder="Contraseña">
 					  </div>
 					  <button id="login" type="submit" class="btn btn-theme">Inicia sesión</button>
 				</form>					

@@ -89,7 +89,10 @@ url:"php/descarga_inicial.php"
 .done(function(data,textStatus,errorThrown)
 {
 //alert("Numero de categorias disponibles->"+data.num_categorias);
- 
+alert("Usuario actual->"+data.usuario_actual);
+
+
+$("#bienvenida_usuario").html("Hola " + data.usuario_actual);
 $("#numero_cliente").html(data.numero_cliente);
 $("#numero_fotos").html(data.numero_fotos);
 $("#numero_loc").html(data.numero_loc);

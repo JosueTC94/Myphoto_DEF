@@ -1,12 +1,10 @@
- <?php
- 
-  require('conexion.php');
+<?php
+require('conexion.php');
      
-     session_start();
      $jsondata = array();
      
+     $jsondata['usuario_actual'] = $_COOKIE["Usuario_actual"]; 
 
-     $jsondata['usuario_actual'] = $_SESSION['user']; 
      $sql = "SELECT COUNT(user) as users from TIO_usuarios";
  
      $result = $conn->query($sql);
@@ -52,7 +50,7 @@
              $jsondata['numero_loc'] = 0;
      }
 
-     $user = $_SESSION['user'];
+     $user = $_COOKIE["Usuario_actual"];
      $sql4 = "select * from TIO_usuarios where user = '$user'";
 
      $result4 = $conn->query($sql4);
@@ -70,7 +68,7 @@
      }
      else
      {
-             $jsondata['numero_loc'] = 0;
+             $jsondata['success'] = "Fallo durante la seleccion del usuario";
      }
 
      $sql6 = "SELECT MIN(id_imagen) as id_minimo from TIO_IMAGENES";

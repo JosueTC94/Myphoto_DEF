@@ -9,10 +9,10 @@ $(document).ready(function()
 	$("#mensaje_respuesta").show();
         event.preventDefault();
         //alert("click en login");
-        usu=$("#user").val();
-        //alert(usu);
-        pass=$("#pass").val();
-        //alert(pass);
+        usu=$("#usuario").val();
+        alert(usu);
+        pass=$("#contrasenia").val();
+        alert(pass);
         if(usu == "")
 	{
 		if(pass == "")
@@ -46,7 +46,8 @@ $(document).ready(function()
             //alert("Id_usuario->"+data.ID_usuario);
             //alert("Usu->"+data.usu);
             //alert("pass->"+data.pass);
-            		$("#mensaje_respuesta").html("<h4>"+data.respuesta+"</h4>");
+            		alert(data.probando);
+			$("#mensaje_respuesta").html("<h4>"+data.respuesta+"</h4>");
             		setTimeout(function(){location.href="../inicio_filtro.php";},500);
             //Actualizo la variable sesion
 
