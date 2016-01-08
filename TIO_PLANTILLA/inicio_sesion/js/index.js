@@ -10,9 +10,9 @@ $(document).ready(function()
         event.preventDefault();
         //alert("click en login");
         usu=$("#usuario").val();
-        alert(usu);
+//        alert(usu);
         pass=$("#contrasenia").val();
-        alert(pass);
+//        alert(pass);
         if(usu == "")
 	{
 		if(pass == "")
@@ -46,10 +46,13 @@ $(document).ready(function()
             //alert("Id_usuario->"+data.ID_usuario);
             //alert("Usu->"+data.usu);
             //alert("pass->"+data.pass);
-            		alert(data.probando);
+            		//alert(data.probando);
 			$("#mensaje_respuesta").html("<h4>"+data.respuesta+"</h4>");
-            		setTimeout(function(){location.href="../inicio_filtro.php";},500);
-            //Actualizo la variable sesion
+			if(data.respuesta == 'El usuario es correcto')
+			{
+            			setTimeout(function(){location.href="../inicio_filtro.php";},500);
+			}
+           //Actualizo la variable sesion
 
         		})
         		.fail(function(jqXHR,textStatus,errorThrown)

@@ -79,7 +79,9 @@ cursor:pointer;
             <!-- Nav Starts -->
             <div class="navbar-collapse  collapse">
               <ul class="nav navbar-nav navbar-right scroll">
-                <li class="active"><a id="home_"  href="inicio_filtro.php">Home</a></li>
+	      <li><a href=""><input type="text" class="form-control" id="lupa_busqueda" placeholder="Introduzca palabra" style="display:none;margin-top:10px;"></a></li>
+	      <li><a href=""><i id="lupa" class="fa fa-search"></i></a></li>  
+              <li class="active"><a id="home_"  href="inicio_filtro.php">Home</a></li>
 		<li ><a id="filtrar" href="#seccion_filtro">Buscar usuario</a></li>
 		 <li ><a id="acerca">Acerca de Myphoto</a></li>
 		 <!--li ><a href="#contact">Subir imagen</a></li-->
@@ -111,7 +113,7 @@ cursor:pointer;
 	    <div class="form-group">
 	        <input type="text" class="form-control" id="filtro_buscar" placeholder="Introduce usuario">
 	    </div>
-    <button id="boton_filtro" type="submit" class="btn btn-default">Buscar</button>
+    <button id="boton_filtro" type="button" class="btn btn-info" style="margin-left:25px;padding-bottom:35px;border-radius:8px;height:35px;">Buscar</button>
 </form>
 
 </div>	
@@ -120,7 +122,7 @@ cursor:pointer;
 <div id="imagenes">
 <div id="works"  class=" clearfix grid"> 
     <figure class="effect-oscar  wowload fadeIn">
-        <img src="images/portfolio/1.jpg" alt="img01"/>
+        <img  src="images/portfolio/paisaje.jpg" alt="img01"/>
         <figcaption>
             <h2 id="etiqueta">Paisaje</h2>
             <p>Descripción<br>
@@ -129,7 +131,7 @@ cursor:pointer;
         </figcaption>
     </figure>
      <figure class="effect-oscar  wowload fadeInUp">
-        <img src="images/portfolio/2.jpg" alt="img01"/>
+        <img src="images/portfolio/amigos.jpg" alt="img01"/>
         <figcaption>
             <h2>Amigos</h2>
             <p>Descripción<br>
@@ -137,7 +139,7 @@ cursor:pointer;
         </figcaption>
     </figure>
      <figure class="effect-oscar  wowload fadeInUp">
-        <img src="images/portfolio/3.jpg" alt="img01"/>
+        <img src="images/portfolio/musica.jpg" alt="img01"/>
         <figcaption>
             <h2>Música</h2>
             <p>Descripción<br>
@@ -145,7 +147,7 @@ cursor:pointer;
         </figcaption>
     </figure>
      <figure class="effect-oscar  wowload fadeInUp">
-        <img src="images/portfolio/4.jpg" alt="img01"/>
+        <img src="images/portfolio/familia.jpg" alt="img01"/>
         <figcaption>
             <h2>Familia</h2>
             <p>Descripción<br>
@@ -153,7 +155,7 @@ cursor:pointer;
         </figcaption>
     </figure>
      <figure class="effect-oscar  wowload fadeInUp">
-        <img src="images/portfolio/5.jpg" alt="img01"/>
+        <img src="images/portfolio/viajes.jpg" alt="img01"/>
         <figcaption>
             <h2>Viajes</h2>
             <p>Descripción<br>
@@ -384,10 +386,7 @@ cursor:pointer;
                                                 
 						<label for="password">Password:</label>
                                                 <input type="password" id="password_perfil" placeholder="">
-                                                
-						<label for="apellidos">Confirmar password:</label>
-                                                <input type="password" id="confirmar_password_perfil" placeholder="">
-                                                
+                                                 
 						<label for="email">Email:</label>
                                                 <input type="text" style="color-border:grey;"  id="email_perfil" placeholder="">
 					</form>

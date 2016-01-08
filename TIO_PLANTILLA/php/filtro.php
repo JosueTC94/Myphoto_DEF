@@ -14,11 +14,13 @@ $jsondata = array();
 
         if($result->num_rows > 0)
         {
-                $jsondata['resultados'] = "Se han encontrado ".$row['photos']." fotos del usuario ".$filtro;	              
+		$jsondata['resultados'] = $result->num_rows;
+                $jsondata['mensaje_respuesta'] = "Se han encontrado ".$row['photos']." fotos del usuario ".$filtro;	              
         }
         else
         {
                 $jsondata['resultados'] = 0;
+                $jsondata['mensaje_respuesta'] = "No se han encontrado imagenes";
         }
 
      $sql5 = "SELECT * FROM TIO_IMAGENES WHERE usuario like '$filtro'";
@@ -35,7 +37,9 @@ $jsondata = array();
      }
      else
      {
-             $jsondata['num_imagenes'] = 0;
+                $jsondata['resultados'] = 0;
+                $jsondata['mensaje_respuesta'] = "No se han encontrado imagenes";
+                $jsondata['num_imagenes'] = 0;
      }
 
      $sql6 = "SELECT MIN(id_imagen) as id_minimo from TIO_IMAGENES WHERE usuario like '$filtro'";

@@ -21,6 +21,8 @@ location.href="#comunidad_myphoto";
 
 $("#filtrar").click(function()
 {
+	location.href="#imagenes";
+	$("#mensaje_aviso").css("display","none");
 	$("#seccion_filtro").toggle("slow");
 	$("#seccion_filtro").attr("class","active");
 });
@@ -83,13 +85,21 @@ $("#otras_categorias").click(function()
 mostrar_imagenes(null,  null);
 });
 
+$("#lupa").click(function()
+{
+	$("#lupa_busqueda").toggle("slow");
+	$("#lupa_busqueda").change(function()
+	{
+		mostrar_imagenes(null,null,$("#lupa_busqueda").val());
+	});
+});
 $.ajax({
 url:"php/descarga_inicial.php"
 })
 .done(function(data,textStatus,errorThrown)
 {
 //alert("Numero de categorias disponibles->"+data.num_categorias);
-alert("Usuario actual->"+data.usuario_actual);
+//alert("Usuario actual->"+data.usuario_actual);
 
 
 $("#bienvenida_usuario").html("Hola " + data.usuario_actual);
@@ -256,7 +266,7 @@ $("#salir").click(function()
 
 
 
-$("#archivoImage").change(function()
+/*$("#archivoImage").change(function()
 {
         var inputFileImage = document.getElementById("archivoImage");
         var file = inputFileImage.files[0];
@@ -264,7 +274,7 @@ $("#archivoImage").change(function()
         data.append('archivo',file);
 	
 	$("#imagen_a_subir").html("<img src="+file+" width=100% height=150px></img>");
-});
+});*/
 
 $(":radio").click(function()
 {
@@ -360,8 +370,8 @@ $("#subir_imagen").click(function()
 
 $("#actualizar_perfil").click(function()
 {
-       var parametros_perfil = "user="+$("#usuario_perfil").val()+"&apellidos_registro="+$("#apellidos_perfil").val()+"&nombre_perfil="+$("#nombre_perfil").val()+"&password_perfil="+$("#password_perfil").val()+"&email_perfil="+$("#email_perfil").val()+"&detalles_perfil="+$("#descripcion_perfil").val();
-       alert(parametros_perfil);
+       var parametros_perfil = "user="+$("#usuario_perfil").val()+"&apellidos_perfil="+$("#apellidos_perfil").val()+"&nombre_perfil="+$("#nombre_perfil").val()+"&password_perfil="+$("#password_perfil").val()+"&email_perfil="+$("#email_perfil").val()+"&detalles_perfil="+$("#descripcion_perfil").val();
+//       alert(parametros_perfil);
        $.ajax({
            data: parametros_perfil,
            type: "POST",
@@ -395,7 +405,7 @@ var marker=new google.maps.Marker({
 marker.setMap(map);
 }
 
-function mostrar_imagenes(filtro_usuario,filtro_categoria)
+function mostrar_imagenes(filtro_usuario,filtro_categoria,filtro_general)
 {
 //alert("Entr en funcion");
 var id_minimo;
@@ -415,10 +425,20 @@ if(filtro_usuario != null)
 	}
 	else
 	{
-		datos = "";
-		url_ = "php/descarga_inicial.php";
+		if(filtro_general != null)
+		{
+			//alert("fILTRO GENERAL");
+		        datos = "buscando="+filtro_general;
+		        url_  = "php/filtro_general.php";
+		}
+		else
+		{
+			datos = "";
+			url_ = "php/descarga_inicial.php";
+		}
 	}
 }
+
 
 $.ajax({
 data: datos,
@@ -427,15 +447,12 @@ url: url_
 })
 .done(function(data,textStatus,jqXHR)
 {
-//alert("Done");
-//alert("Resultados->"+data.resultados);
-//alert("Numero de resultados->"+data.num_imagenes);
+
 id_minimo = data.id_minimo;
 id_maximo = data.id_maximo;
-//alert("Id_minimo->"+id_minimo);
-//alert("Id_maximo->"+id_maximo);
-$("#mensaje_aviso").html("<h3 style="+"margin-top:150px;>"+data.resultados+"</h3>");
+
 $("#imagenes").fadeOut();
+
 setTimeout(
 function()
 {
@@ -443,12 +460,14 @@ function()
 $("#imagenes").html(" ");
 if(data.resultados != 0)
 {
+	$("#mensaje_aviso").css("display","none");
+	location.href="#imagenes";
         var salida = "<div id="+"works"+">";
         //output = "<div id="+"works>";
         $.each(data.imagenes,function(key,value)
         {
   //              alert("Entro");
-                salida += "<figure class="+"effect-oscar  wowload fadeInUp"+"><img height=450px width=102% src="+value.direccion_imagen+" alt=No puede encontrarse la imagen/><figcaption><h2 id="+"etiqueta"+">"+value.categoria+"</h2><p>"+value.titulo_imagen+"<br><a  href="+value.direccion_imagen+" title="+value.titulo_imagen+" data-gallery>Ver</a><a id="+value.id_imagen+" href=#about>Info foto</a></p></figcaption></figure>";
+                salida += "<figure style="+"background:"+"black;border-style:solid;border-color:white;border-width:2px;"+" class="+"effect-oscar  wowload fadeInUp"+"><center><img height=450px src="+value.direccion_imagen+" alt=No puede encontrarse la imagen/></center><figcaption><h2 id="+"etiqueta"+">"+value.categoria+"</h2><p>"+value.titulo_imagen+"<br><a  href="+value.direccion_imagen+" title="+value.titulo_imagen+" data-gallery>Ver</a><a id="+value.id_imagen+" href=#about>Info foto</a></p></figcaption></figure>";
         })
         salida += "</div>";
   //      alert(salida); 
@@ -459,14 +478,15 @@ if(data.resultados != 0)
 }
 else
 {
+//	alert(data.mensaje_respuesta);
 	$("#mensaje_aviso").fadeIn();
-	$("#mensaje_aviso").html("<h4 style=text-align:center;margin-top:150px;>No se han encontrado imagenes</h4>");
+	$("#mensaje_aviso").html("<h3 style="+"text-align:center;margin-top:150px;>"+data.mensaje_respuesta+"</h3>");
 }
 for(i=id_minimo;i<=id_maximo;i++)
 {
         $("#"+i).click(function()
         {
-//                alert("he pulsado el "+i);
+                //alert("he pulsado el "+i);
                 //alert("Caracteristicas de la imagen:"+this.id);
                 var id_imagen = this.id;
                 $("#about").fadeIn();

@@ -1,5 +1,5 @@
 <?php
-if(isset($_COOKIE['usuario']) == true)
+if(isset($_COOKIE['Usuario_actual']) == true)
 {
       header("location: ../inicio_filtro.php");
 }

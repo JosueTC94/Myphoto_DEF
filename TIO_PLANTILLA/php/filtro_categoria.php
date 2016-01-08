@@ -23,6 +23,7 @@ $jsondata = array();
         }
         else
         {
+	     $jsondata['mensaje_respuesta'] = "No se han encontrado imagenes";
              $jsondata['resultados'] = 0;
         }
 

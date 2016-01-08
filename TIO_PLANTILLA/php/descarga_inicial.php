@@ -115,6 +115,7 @@ require('conexion.php');
      }
      else
      {
+	     $jsondata['mensaje_respuesta'] = "No se han encontrado imagenes";
              $jsondata['num_imagenes'] = 0;
      }
 
