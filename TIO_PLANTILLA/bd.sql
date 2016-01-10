@@ -39,7 +39,7 @@ CREATE TABLE `TIO_IMAGENES` (
   `categoria` varchar(150) DEFAULT NULL,
   `usuario` varchar(150) NOT NULL,
   PRIMARY KEY (`id_imagen`)
-) ENGINE=InnoDB AUTO_INCREMENT=210 DEFAULT CHARSET=utf8;
+);
 CREATE TABLE `TIO_usuarios` (
   `ID_usuario` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `nombre_usuario` varchar(300) NOT NULL,
@@ -49,9 +49,6 @@ CREATE TABLE `TIO_usuarios` (
   `detalles` varchar(450) NOT NULL,
   `nombre_archivo` varchar(250) NOT NULL,
   `user` varchar(150) NOT NULL,
-  PRIMARY KEY (`user`)
-) ENGINE=InnoDB AUTO_INCREMENT=210 DEFAULT CHARSET=utf8;
-
-
-
-/*!40101 SET character_set_client = @saved_cs_client */;
+  UNIQUE (`user`),
+  PRIMARY KEY (`ID_usuario`)
+)
